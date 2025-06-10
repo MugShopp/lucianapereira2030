@@ -2,35 +2,38 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cápsula do Tempo - MugShopp</title>
   <style>
+    /* Fundo degradê suave azul Tiffany */
     body {
       margin: 0;
       padding-top: 60px;
-      font-family: 'Courier New', Courier, monospace;
-      background: #f5ebe0; /* tom pastel suave bege claro */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a0d8d3, #def2f1);
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       min-height: 100vh;
-      color: #4a4a4a; /* cinza escuro suave */
+      color: #1a1a1a;
       box-sizing: border-box;
     }
 
     h1 {
       font-size: 24px;
       margin: 0 20px 20px;
-      color: #3b3b3b;
+      font-weight: 600;
+      color: #053742;
     }
 
     p {
       max-width: 600px;
       margin: 10px 20px;
       font-size: 16px;
-      color: #555;
+      color: #074f56;
+      line-height: 1.4;
     }
 
     .ampulheta {
@@ -39,48 +42,49 @@
       margin: 20px 0;
     }
 
+    /* Contador pequeno e elegante */
     #contador {
-      font-size: 28px;
-      font-weight: 600;
-      margin: 16px 0;
-      color: #6b5b95; /* lilás suave */
-      letter-spacing: 1.2px;
-      padding: 12px 30px;
-      border: 2.5px solid #6b5b95;
-      border-radius: 10px;
-      background: #efe7f7; /* lilás bem claro */
-      box-shadow: 0 0 12px rgba(107, 91, 149, 0.3);
+      font-size: 20px;
+      font-weight: 500;
+      margin: 20px 0;
+      color: #074f56;
+      letter-spacing: 1.1px;
+      padding: 8px 20px;
+      border: 1.8px solid #40c4b5; /* Azul Tiffany */
+      border-radius: 12px;
+      background: rgba(255 255 255 / 0.7);
+      box-shadow: 0 0 10px rgba(64, 196, 181, 0.3);
       display: inline-block;
-      font-family: 'Courier New', Courier, monospace;
-      text-transform: uppercase;
       user-select: none;
-      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-      max-width: 95vw;
-      white-space: nowrap;
-      overflow-x: auto;
+      min-width: 280px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-transform: capitalize;
+      transition: box-shadow 0.3s ease;
     }
 
     #contador:hover {
-      background-color: #d9d1f2;
-      color: #553c9a;
-      box-shadow: 0 0 25px rgba(85, 60, 154, 0.5);
+      box-shadow: 0 0 18px rgba(64, 196, 181, 0.6);
       cursor: default;
     }
 
+    /* Botão preto */
     button {
-      margin-top: 12px;
-      padding: 10px 22px;
+      margin-top: 14px;
+      padding: 10px 26px;
       font-size: 16px;
-      background-color: #8e7cc3; /* lilás médio */
-      color: white;
+      background-color: #000000;
+      color: #ffffff;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: 600;
       transition: background-color 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      letter-spacing: 0.8px;
     }
 
     button:hover {
-      background-color: #6b5b95;
+      background-color: #333333;
     }
 
     .logo-rodape {
@@ -118,7 +122,7 @@
 
   <div id="mensagem-final">
     <video controls>
-      <source src="Luciana.mp4" type="video/mp4">
+      <source src="Luciana.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
@@ -142,37 +146,34 @@
       let meses = dataFinal.getMonth() - agora.getMonth();
       let dias = dataFinal.getDate() - agora.getDate();
       let horas = dataFinal.getHours() - agora.getHours();
-      let minutos = dataFinal.getMinutes() - agora.getMinutes();
-      let segundos = dataFinal.getSeconds() - agora.getSeconds();
 
-      if (segundos < 0) {
-        segundos += 60;
-        minutos--;
-      }
-
-      if (minutos < 0) {
-        minutos += 60;
-        horas--;
-      }
-
+      // Ajustes negativos para horas
       if (horas < 0) {
         horas += 24;
         dias--;
       }
 
+      // Ajustes negativos para dias
       if (dias < 0) {
         const mesAnterior = new Date(dataFinal.getFullYear(), dataFinal.getMonth(), 0);
         dias += mesAnterior.getDate();
         meses--;
       }
 
+      // Ajustes negativos para meses
       if (meses < 0) {
         meses += 12;
         anos--;
       }
 
+      // Garantir que nenhum valor fique negativo
+      anos = Math.max(0, anos);
+      meses = Math.max(0, meses);
+      dias = Math.max(0, dias);
+      horas = Math.max(0, horas);
+
       document.getElementById('contador').textContent =
-        `${anos} anos ${meses} meses ${dias} dias ${horas}h ${minutos}m ${segundos}s`;
+        `${anos} anos ${meses} meses ${dias} dias ${horas} horas`;
     }
 
     function reiniciarContagem() {
