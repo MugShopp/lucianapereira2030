@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cápsula do Tempo - MugShopp</title>
+  <style>
+    body {
+      margin: 0;
+      padding-top: 60px;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0 20px 20px;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 10px 20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .ampulheta {
+      width: 220px;
+      height: auto;
+      margin: 20px 0;
+    }
+
+    #contador {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f7a;
+    }
+
+    .logo-rodape {
+      width: 160px;
+      margin-top: 40px;
+    }
+
+    #mensagem-final {
+      margin-top: 30px;
+      display: none;
+    }
+
+    video {
+      margin-top: 20px;
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
+
+  <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
+  
+  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
+  A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
+
+  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada" />
+
+  <div id="contador"></div>
+
+  <button onclick="reiniciarContagem()">Recomeçar</button>
+
+  <div id="mensagem-final">
+    <video controls>
+      <source src="Luciana.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+
+  <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
+
+  <script>
+    const dataFinal = new Date("2040-06-10T00:00:00").getTime();
+
+    function atualizarContador() {
+      const agora = new Date().getTime();
+      const distancia = dataFinal - agora;
+
+      if (distancia <= 0) {
+        document.getElementById('contador').textContent = '';
+        document.getElementById('mensagem-final').style.display = 'block';
+        clearInterval(intervalo);
+        return;
+      }
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+      document.getElementById('contador').textContent =
+        `${dias} dias ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    function reiniciarContagem() {
+      window.location.reload();
+    }
+
+    const intervalo = setInterval(atualizarContador, 1000);
+    window.onload = atualizarContador;
+  </script>
+</body>
+</html>
