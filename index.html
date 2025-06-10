@@ -9,27 +9,28 @@
       margin: 0;
       padding-top: 60px;
       font-family: 'Courier New', Courier, monospace;
-      background: #333;
+      background: #f5ebe0; /* tom pastel suave bege claro */
       text-align: center;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       min-height: 100vh;
-      color: #fff;
+      color: #4a4a4a; /* cinza escuro suave */
       box-sizing: border-box;
     }
 
     h1 {
       font-size: 24px;
       margin: 0 20px 20px;
+      color: #3b3b3b;
     }
 
     p {
       max-width: 600px;
       margin: 10px 20px;
       font-size: 16px;
-      color: #ddd;
+      color: #555;
     }
 
     .ampulheta {
@@ -39,44 +40,47 @@
     }
 
     #contador {
-      font-size: 40px;
-      font-weight: 700;
+      font-size: 28px;
+      font-weight: 600;
       margin: 16px 0;
-      color: #00ffff; /* Azul elétrico */
-      letter-spacing: 1px;
-      padding: 20px 40px;
-      border: 3px solid #00ffff;
-      border-radius: 12px;
-      background: #222;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      color: #6b5b95; /* lilás suave */
+      letter-spacing: 1.2px;
+      padding: 12px 30px;
+      border: 2.5px solid #6b5b95;
+      border-radius: 10px;
+      background: #efe7f7; /* lilás bem claro */
+      box-shadow: 0 0 12px rgba(107, 91, 149, 0.3);
       display: inline-block;
-      transition: all 0.3s ease;
       font-family: 'Courier New', Courier, monospace;
       text-transform: uppercase;
       user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      max-width: 95vw;
+      white-space: nowrap;
+      overflow-x: auto;
     }
 
     #contador:hover {
-      background: #444;
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.7);
-      border-color: #00b8b8;
-      color: #00b8b8;
+      background-color: #d9d1f2;
+      color: #553c9a;
+      box-shadow: 0 0 25px rgba(85, 60, 154, 0.5);
+      cursor: default;
     }
 
     button {
       margin-top: 12px;
-      padding: 10px 20px;
+      padding: 10px 22px;
       font-size: 16px;
-      background-color: #008CBA;
+      background-color: #8e7cc3; /* lilás médio */
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #005f7a;
+      background-color: #6b5b95;
     }
 
     .logo-rodape {
@@ -175,7 +179,7 @@
       window.location.reload();
     }
 
-    const intervalo = setInterval(atualizarContador, 1000); // Atualiza a cada segundo
+    const intervalo = setInterval(atualizarContador, 1000);
     window.onload = atualizarContador;
   </script>
 </body>
