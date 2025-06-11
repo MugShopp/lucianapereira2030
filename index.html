@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,58 +7,49 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
       background: #f9f9f9;
-      margin: 0;
+      color: #333;
+      text-align: center;
       padding: 20px;
     }
 
     h1 {
-      font-size: 24px;
-      margin-top: 30px;
-    }
-
-    p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: 10px auto;
-      line-height: 1.5;
+      font-size: 1.8em;
     }
 
     .ampulheta {
       width: 110px;
-      height: 110px;
+      margin: 20px auto;
       animation: girar 6s linear infinite;
-      margin: 30px auto;
     }
 
     @keyframes girar {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .contador {
-      font-size: 20px;
+      font-size: 1.2em;
+      margin: 20px auto 10px;
       background: #fff;
-      display: inline-block;
-      padding: 15px;
+      padding: 10px;
       border-radius: 10px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      margin: 20px auto 5px;
+      max-width: 350px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .data-prevista {
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 30px;
+    .video-container {
+      display: none;
+      margin-top: 20px;
     }
 
-    .botao {
-      padding: 12px 30px;
-      font-size: 18px;
+    .recomecar-btn {
+      margin-top: 20px;
+      padding: 10px 30px;
       background: #000;
       color: #fff;
       border: none;
+      font-size: 1.1em;
       border-radius: 10px;
       cursor: pointer;
     }
@@ -66,84 +57,91 @@
     .logo {
       width: 120px;
       margin: 40px auto 5px;
+      display: block;
     }
 
-    .rodape {
-      font-size: 12px;
+    .creditos {
+      font-size: 0.8em;
+      color: #888;
+      margin-bottom: 40px;
+    }
+
+    .data-prevista {
+      font-size: 0.9em;
       color: #666;
-      margin-bottom: 20px;
-    }
-
-    video {
-      margin-top: 30px;
-      max-width: 90%;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
-  <h1>Contagem Regressiva</h1>
 
-  <p>Uma cápsula do tempo é um convite para sentir.<br>
-  Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
+  <h1>⏳ Cápsula do Tempo com contagem regressiva.</h1>
 
-  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página. A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
+  <p>
+    Uma cápsula do tempo é um convite para sentir. <br>
+    Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.
+  </p>
+
+  <p>
+    Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página. A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙
+  </p>
 
   <img src="Ampulheta.png" class="ampulheta" alt="Ampulheta girando" />
 
   <div class="contador" id="contador"></div>
   <div class="data-prevista">Data prevista: 10/06/2030</div>
 
-  <button class="botao" onclick="location.reload()">Recomeçar</button>
-
-  <div id="videoContainer" style="display: none;">
-    <video controls autoplay>
+  <div class="video-container" id="videoContainer">
+    <video width="90%" controls>
       <source src="capsula_VQ6JuIae.mp4" type="video/mp4" />
       Seu navegador não suporta o vídeo.
     </video>
   </div>
 
-  <img src="logo-mugshopp.png" class="logo" alt="Logo MugShopp" />
-  <div class="rodape">Feito por MugShopp Presentes Personalizados.</div>
+  <button class="recomecar-btn" onclick="location.reload()">Recomeçar</button>
+
+  <img src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" class="logo" />
+  <div class="creditos">Feito por MugShopp Presentes Personalizados.</div>
 
   <script>
-    function calcularDiferencaData(futura) {
-      const agora = new Date();
-      let anos = futura.getFullYear() - agora.getFullYear();
-      let meses = futura.getMonth() - agora.getMonth();
-      let dias = futura.getDate() - agora.getDate();
-
-      if (dias < 0) {
-        meses -= 1;
-        dias += new Date(futura.getFullYear(), futura.getMonth(), 0).getDate();
-      }
-
-      if (meses < 0) {
-        anos -= 1;
-        meses += 12;
-      }
-
-      return { anos, meses, dias };
-    }
-
     function atualizarContador() {
-      const dataFinal = new Date('2030-06-10T00:00:00');
       const agora = new Date();
+      const futuro = new Date("2030-06-10T00:00:00");
 
-      if (agora >= dataFinal) {
-        document.getElementById('contador').style.display = 'none';
-        document.querySelector('.data-prevista').style.display = 'none';
-        document.querySelector('.ampulheta').style.display = 'none';
-        document.getElementById('videoContainer').style.display = 'block';
+      const diff = futuro - agora;
+
+      if (diff <= 0) {
+        document.getElementById("contador").style.display = "none";
+        document.querySelector(".data-prevista").style.display = "none";
+        document.getElementById("videoContainer").style.display = "block";
         return;
       }
 
-      const { anos, meses, dias } = calcularDiferencaData(dataFinal);
-      document.getElementById('contador').textContent =
-        `Faltam ${anos} anos, ${meses} meses e ${dias} dias...`;
+      const anos = futuro.getFullYear() - agora.getFullYear();
+      const meses = futuro.getMonth() - agora.getMonth();
+      const dias = futuro.getDate() - agora.getDate();
+
+      let totalAnos = anos;
+      let totalMeses = meses;
+      let totalDias = dias;
+
+      if (totalDias < 0) {
+        totalMeses--;
+        const mesAnterior = new Date(futuro.getFullYear(), futuro.getMonth(), 0).getDate();
+        totalDias += mesAnterior;
+      }
+
+      if (totalMeses < 0) {
+        totalAnos--;
+        totalMeses += 12;
+      }
+
+      document.getElementById("contador").innerText =
+        `Faltam ${totalAnos} anos, ${totalMeses} meses e ${totalDias} dias...`;
     }
 
     atualizarContador();
-    setInterval(atualizarContador, 60 * 1000); // Atualiza a cada 1 minuto
+    setInterval(atualizarContador, 60000); // atualiza a cada minuto
   </script>
 </body>
 </html>
