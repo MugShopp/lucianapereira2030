@@ -2,197 +2,148 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cápsula do Tempo - MugShopp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cápsula do Tempo</title>
   <style>
     body {
-      margin: 0;
-      padding-top: 60px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f6f9f9;
-      color: #2e2e2e;
+      font-family: Arial, sans-serif;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      min-height: 100vh;
-      box-sizing: border-box;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
     }
 
     h1 {
       font-size: 24px;
-      margin: 0 20px 20px;
-      font-weight: 600;
-      color: #222;
+      margin-top: 30px;
     }
 
     p {
+      font-size: 18px;
       max-width: 600px;
-      margin: 10px 20px;
-      font-size: 16px;
-      color: #444;
+      margin: 10px auto;
       line-height: 1.5;
     }
 
     .ampulheta {
       width: 110px;
-      height: auto;
-      margin: 20px 0;
-      animation: girar 30s linear infinite;
-      transform-origin: center;
+      height: 110px;
+      animation: girar 6s linear infinite;
+      margin: 30px auto;
     }
 
     @keyframes girar {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    #contador {
-      font-size: 16px;
-      font-weight: 400;
-      margin: 20px 0;
-      color: #3b3b3b;
-      letter-spacing: 0.8px;
-      padding: 10px 24px;
-      border: 1.5px solid #ccc;
-      border-radius: 10px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    .contador {
+      font-size: 20px;
+      background: #fff;
       display: inline-block;
-      user-select: none;
-      min-width: 260px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      margin: 20px auto 5px;
     }
 
-    button {
-      margin-top: 14px;
-      padding: 10px 26px;
-      font-size: 16px;
-      background-color: #000000;
-      color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-      letter-spacing: 0.8px;
-    }
-
-    button:hover {
-      background-color: #333333;
-    }
-
-    .logo-rodape {
-      width: 160px;
-      margin-top: 40px;
-    }
-
-    .assinatura {
-      font-size: 13px;
+    .data-prevista {
+      font-size: 12px;
       color: #666;
-      margin-top: 8px;
       margin-bottom: 30px;
     }
 
-    #mensagem-final {
-      margin-top: 30px;
-      display: none;
+    .botao {
+      padding: 12px 30px;
+      font-size: 18px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .logo {
+      width: 120px;
+      margin: 40px auto 5px;
+    }
+
+    .rodape {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 20px;
     }
 
     video {
-      margin-top: 20px;
+      margin-top: 30px;
       max-width: 90%;
-      height: auto;
-      border-radius: 10px;
     }
   </style>
 </head>
 <body>
+  <h1>Contagem Regressiva</h1>
 
-  <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
+  <p>Uma cápsula do tempo é um convite para sentir.<br>
+  Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
 
-  <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.</p>
-  
-  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
-  A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
+  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página. A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-  <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando lentamente" />
+  <img src="Ampulheta.png" class="ampulheta" alt="Ampulheta girando" />
 
-  <div id="contador"></div>
+  <div class="contador" id="contador"></div>
+  <div class="data-prevista">Data prevista: 10/06/2030</div>
 
-  <button onclick="reiniciarContagem()">Recomeçar</button>
+  <button class="botao" onclick="location.reload()">Recomeçar</button>
 
-  <div id="mensagem-final">
-    <video controls>
-      <source src="Luciana.mp4" type="video/mp4" />
-      Seu navegador não suporta vídeo HTML5.
+  <div id="videoContainer" style="display: none;">
+    <video controls autoplay>
+      <source src="capsula_VQ6JuIae.mp4" type="video/mp4" />
+      Seu navegador não suporta o vídeo.
     </video>
   </div>
 
-  <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
-  <div class="assinatura">Feito por MugShopp Presentes Personalizados.</div>
+  <img src="logo-mugshopp.png" class="logo" alt="Logo MugShopp" />
+  <div class="rodape">Feito por MugShopp Presentes Personalizados.</div>
 
   <script>
-    const dataAlvo = new Date("2030-06-10T00:00:00");
-
-    function calcularTempoRestante(dataAlvo) {
+    function calcularDiferencaData(futura) {
       const agora = new Date();
-      let anos = dataAlvo.getFullYear() - agora.getFullYear();
-      let meses = dataAlvo.getMonth() - agora.getMonth();
-      let semanas = 0;
-      let horas = dataAlvo.getHours() - agora.getHours();
+      let anos = futura.getFullYear() - agora.getFullYear();
+      let meses = futura.getMonth() - agora.getMonth();
+      let dias = futura.getDate() - agora.getDate();
 
-      if (horas < 0) {
-        horas += 24;
-        dataAlvo.setDate(dataAlvo.getDate() - 1);
+      if (dias < 0) {
+        meses -= 1;
+        dias += new Date(futura.getFullYear(), futura.getMonth(), 0).getDate();
       }
 
       if (meses < 0) {
-        anos--;
+        anos -= 1;
         meses += 12;
       }
 
-      const tempDate = new Date(agora.getTime());
-      tempDate.setFullYear(tempDate.getFullYear() + anos);
-      tempDate.setMonth(tempDate.getMonth() + meses);
-
-      const diasRestantes = Math.floor((dataAlvo - tempDate) / (1000 * 60 * 60 * 24));
-      semanas = Math.floor(diasRestantes / 7);
-
-      return { anos, meses, semanas, horas };
+      return { anos, meses, dias };
     }
 
     function atualizarContador() {
+      const dataFinal = new Date('2030-06-10T00:00:00');
       const agora = new Date();
-      const diferenca = dataAlvo - agora;
 
-      if (diferenca <= 0) {
-        document.getElementById("contador").textContent = "";
-        document.getElementById("mensagem-final").style.display = "block";
-        clearInterval(intervalo);
+      if (agora >= dataFinal) {
+        document.getElementById('contador').style.display = 'none';
+        document.querySelector('.data-prevista').style.display = 'none';
+        document.querySelector('.ampulheta').style.display = 'none';
+        document.getElementById('videoContainer').style.display = 'block';
         return;
       }
 
-      const tempo = calcularTempoRestante(new Date(dataAlvo));
-
-      document.getElementById("contador").textContent =
-        `Faltam ${tempo.anos} ${tempo.anos === 1 ? "ano" : "anos"}, ` +
-        `${tempo.meses} ${tempo.meses === 1 ? "mês" : "meses"}, ` +
-        `${tempo.semanas} ${tempo.semanas === 1 ? "semana" : "semanas"} e ` +
-        `${tempo.horas} ${tempo.horas === 1 ? "hora" : "horas"}...`;
+      const { anos, meses, dias } = calcularDiferencaData(dataFinal);
+      document.getElementById('contador').textContent =
+        `Faltam ${anos} anos, ${meses} meses e ${dias} dias...`;
     }
 
-    function reiniciarContagem() {
-      window.location.reload();
-    }
-
-    const intervalo = setInterval(atualizarContador, 1000);
-    window.onload = atualizarContador;
+    atualizarContador();
+    setInterval(atualizarContador, 60 * 1000); // Atualiza a cada 1 minuto
   </script>
 </body>
 </html>
