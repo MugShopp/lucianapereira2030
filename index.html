@@ -144,26 +144,27 @@
       const agora = new Date();
       let anos = dataAlvo.getFullYear() - agora.getFullYear();
       let meses = dataAlvo.getMonth() - agora.getMonth();
-      let dias = dataAlvo.getDate() - agora.getDate();
+      let semanas = 0;
       let horas = dataAlvo.getHours() - agora.getHours();
 
       if (horas < 0) {
         horas += 24;
-        dias--;
-      }
-
-      if (dias < 0) {
-        const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
-        dias += ultimoMes.getDate();
-        meses--;
+        dataAlvo.setDate(dataAlvo.getDate() - 1);
       }
 
       if (meses < 0) {
-        meses += 12;
         anos--;
+        meses += 12;
       }
 
-      return { anos, meses, dias, horas };
+      const tempDate = new Date(agora.getTime());
+      tempDate.setFullYear(tempDate.getFullYear() + anos);
+      tempDate.setMonth(tempDate.getMonth() + meses);
+
+      const diasRestantes = Math.floor((dataAlvo - tempDate) / (1000 * 60 * 60 * 24));
+      semanas = Math.floor(diasRestantes / 7);
+
+      return { anos, meses, semanas, horas };
     }
 
     function atualizarContador() {
@@ -177,12 +178,12 @@
         return;
       }
 
-      const tempo = calcularTempoRestante(dataAlvo);
+      const tempo = calcularTempoRestante(new Date(dataAlvo));
 
       document.getElementById("contador").textContent =
         `Faltam ${tempo.anos} ${tempo.anos === 1 ? "ano" : "anos"}, ` +
         `${tempo.meses} ${tempo.meses === 1 ? "mês" : "meses"}, ` +
-        `${tempo.dias} ${tempo.dias === 1 ? "dia" : "dias"} e ` +
+        `${tempo.semanas} ${tempo.semanas === 1 ? "semana" : "semanas"} e ` +
         `${tempo.horas} ${tempo.horas === 1 ? "hora" : "horas"}...`;
     }
 
