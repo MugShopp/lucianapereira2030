@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cápsula do Tempo - MugShopp</title>
   <style>
-    /* Fundo branco gelo */
     body {
       margin: 0;
       padding-top: 60px;
@@ -37,17 +36,26 @@
     }
 
     .ampulheta {
-      width: 220px;
+      width: 110px;
       height: auto;
       margin: 20px 0;
+      animation: girar 60s linear infinite;
     }
 
-    /* Contador mais delicado e em cinza chumbo */
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     #contador {
       font-size: 16px;
       font-weight: 400;
       margin: 20px 0;
-      color: #3b3b3b; /* cinza chumbo */
+      color: #3b3b3b;
       letter-spacing: 0.8px;
       padding: 10px 24px;
       border: 1.5px solid #ccc;
@@ -60,7 +68,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Botão preto */
     button {
       margin-top: 14px;
       padding: 10px 26px;
@@ -82,6 +89,13 @@
     .logo-rodape {
       width: 160px;
       margin-top: 40px;
+    }
+
+    .assinatura {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+      margin-bottom: 30px;
     }
 
     #mensagem-final {
@@ -106,7 +120,7 @@
   <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
   A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada" />
+  <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando" />
 
   <div id="contador"></div>
 
@@ -114,54 +128,35 @@
 
   <div id="mensagem-final">
     <video controls>
-      <source src="Luciana.mp4" type="video/mp4" />
+      <source src="capsula_VQ6JuIae.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 
   <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
+  <div class="assinatura">Feito por MugShopp Presentes Personalizados.</div>
 
   <script>
-    const dataFinal = new Date("2030-06-10T00:00:00");
+    const dataAlvo = new Date("2030-06-10T00:00:00");
 
     function atualizarContador() {
       const agora = new Date();
+      const diferenca = dataAlvo - agora;
 
-      if (agora >= dataFinal) {
+      if (diferenca <= 0) {
         document.getElementById('contador').textContent = '';
         document.getElementById('mensagem-final').style.display = 'block';
         clearInterval(intervalo);
         return;
       }
 
-      let anos = dataFinal.getFullYear() - agora.getFullYear();
-      let meses = dataFinal.getMonth() - agora.getMonth();
-      let dias = dataFinal.getDate() - agora.getDate();
-      let horas = dataFinal.getHours() - agora.getHours();
-
-      if (horas < 0) {
-        horas += 24;
-        dias--;
-      }
-
-      if (dias < 0) {
-        const mesAnterior = new Date(dataFinal.getFullYear(), dataFinal.getMonth(), 0);
-        dias += mesAnterior.getDate();
-        meses--;
-      }
-
-      if (meses < 0) {
-        meses += 12;
-        anos--;
-      }
-
-      anos = Math.max(0, anos);
-      meses = Math.max(0, meses);
-      dias = Math.max(0, dias);
-      horas = Math.max(0, horas);
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
 
       document.getElementById('contador').textContent =
-        `${anos} anos ${meses} meses ${dias} dias ${horas} horas`;
+        `Faltam ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos...`;
     }
 
     function reiniciarContagem() {
